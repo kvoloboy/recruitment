@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Recruitment.Api.Models.Responses;
+using Recruitment.Domain.Models.Entities;
 
 namespace Recruitment.Api.Services
 {
@@ -19,13 +20,14 @@ namespace Recruitment.Api.Services
             _configuration = configuration;
         }
 
-        public TokenResponse GenerateToken(string email, IdentityUser user)
+        public TokenResponse GenerateToken(string email, User user)
         {
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Role, user.RoleName)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));

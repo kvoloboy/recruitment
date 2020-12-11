@@ -52,7 +52,9 @@ namespace Recruitment.Api.Controllers
             var userId = User.GetId();
             var recruiter = await _recruiterService.GetByUserId(userId);
 
-            await _vacancyService.DeleteAsync(vacancyId, recruiter.Id);
+            var validatePermission = !User.IsInRole("Admin");
+
+            await _vacancyService.DeleteAsync(vacancyId, recruiter.Id, validatePermission);
         }
 
         [HttpPost("find")]

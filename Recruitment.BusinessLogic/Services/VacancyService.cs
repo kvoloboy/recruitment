@@ -30,11 +30,14 @@ namespace Recruitment.BusinessLogic.Services
             _questionnaireToVacancyRelations = _recruitmentDbContext.QuestionnaireToVacancyRelations;
         }
 
-        public async Task DeleteAsync(Guid vacancyId, Guid recruiterId)
+        public async Task DeleteAsync(Guid vacancyId, Guid recruiterId, bool validatePermission = true)
         {
             var vacancy = await _recruitmentDbContext.Vacancies.FindAsync(vacancyId);
 
-            await EnsureRecruiterCanMakeActionWithVacancy(recruiterId, vacancy);
+            if (validatePermission)
+            {
+                await EnsureRecruiterCanMakeActionWithVacancy(recruiterId, vacancy);
+            }
 
             if (!vacancy.IsActive)
             {

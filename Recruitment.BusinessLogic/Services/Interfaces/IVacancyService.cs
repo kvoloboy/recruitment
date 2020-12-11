@@ -12,7 +12,7 @@ namespace Recruitment.BusinessLogic.Services.Interfaces
 
         Task UpdateAsync(Guid id, Guid recruiterId, CreateOrUpdateVacancyRequest request);
 
-        Task DeleteAsync(Guid vacancyId, Guid recruiterId);
+        Task DeleteAsync(Guid vacancyId, Guid recruiterId, bool validatePermission = true);
 
         Task<IEnumerable<VacancyResponseModel>> GetAllAsync(FilterVacancyRequest request);
 

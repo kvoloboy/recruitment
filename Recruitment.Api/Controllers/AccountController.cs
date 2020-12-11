@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Recruitment.Api.Models;
 using Recruitment.Api.Models.Responses;
 using Recruitment.Api.Services;
+using Recruitment.BusinessLogic.Services.Interfaces;
 using Recruitment.Domain.Models.Entities;
 
 namespace Recruitment.Api.Controllers
@@ -17,15 +19,18 @@ namespace Recruitment.Api.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IAuthenticationService _authenticationService;
+        private readonly IUserService _userService;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IAuthenticationService authenticationService)
+            IAuthenticationService authenticationService,
+            IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _authenticationService = authenticationService;
+            _userService = userService;
         }
 
         [HttpPost("sign-in")]

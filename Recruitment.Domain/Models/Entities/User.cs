@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Recruitment.Domain.Models.Entities
 {
@@ -10,5 +9,7 @@ namespace Recruitment.Domain.Models.Entities
         public string AvatarPath { get; set; }
 
         public bool IsBanned { get; set; }
+
+        public string RoleName { get; set; } = "User";
     }
 }

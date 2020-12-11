@@ -1,6 +1,4 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
+﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,6 +41,7 @@ namespace Recruitment.Api.Extensions
             services.AddScoped<IVacancyService, VacancyService>();
             services.AddScoped<IQuestionnaireService, QuestionnaireService>();
             services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<QuestionnaireValidator>();
         }
     }
